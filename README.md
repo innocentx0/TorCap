@@ -1,15 +1,15 @@
 # TorCap
-TOR Node Analyzer Script
+TOR Node Analyzer sniffer
 
-This Bash script is designed for ethical network analysis, specifically to detect and identify connections to the Tor network. It listens to network traffic, filters out specific IP addresses, and checks whether the destination node belongs to a Tor relay. If it does, the script retrieves information such as the Tor relay's fingerprint, nickname, country, and contact details. 
+This Bash script is designed for ethical network analysis, specifically to detect and identify connections to the Tor network and client inside the network receiving / sending data over TOR. It listens to network traffic, filters out specific IP addresses, and checks whether the destination node belongs to a Tor relay. If it does, the script retrieves information such as the Tor relay's fingerprint, nickname, country, and contact details. 
 
-⚠️ Important Disclaimer
+# Important Disclaimer
 
 This tool is made for ethical purposes only. Use it responsibly and always respect privacy, consent, and the rights of others. It is crucial to ensure that the tool is used to promote positive outcomes, improve knowledge, and contribute to the well-being of all.
 
 Never use this tool for malicious activities. Always consider the impact of your actions.
 
-# Important Security Notice
+# Man-in-the-middle (MITM)
 
 To use this script effectively, you must perform a Man-In-The-Middle (MITM) or ARP Spoofing attack on the network to intercept the traffic. Without such an interception, the script will only monitor or analyze traffic coming out from your system.
 
