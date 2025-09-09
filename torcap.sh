@@ -7,12 +7,20 @@
 #apt-get install pv and apt-get install install jq
 #Happy hunting :)
 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-BLUE='\033[1;34m'
-CYAN='\e[1;36m'
+# RED='\033[0;31m'
+# GREEN='\033[0;32m'
+# BLUE='\033[1;34m'
+# CYAN='\e[1;36m'
 
-echo -e "${CYAN}
+MAGENTA='\033[1;35m'
+CYAN='\033[1;36m'
+BLUE='\033[1;34m'
+PURPLE='\033[1;95m'
+NC='\033[0m'
+GHOST_WHITE='\033[1;97m'
+
+
+echo -e "${MAGENTA}
 ___________           _________                
 \__    ___/__________ \_   ___ \_____  ______  
   |    | /  _ \_  __ \/    \  \/\__  \ \____ \ 
@@ -30,7 +38,7 @@ node_analysis() {
        interfaces=$(ifconfig -a | sed 's/[ \t].*//;/^$/d' )
 
        for i in $(echo $interfaces);do
-            echo -e "${GREEN}     $i" | tr -d ":"
+            echo -e "${CYAN}     $i" | tr -d ":"
        done 
        read choose_option
 
@@ -44,9 +52,9 @@ node_analysis() {
             done
 
     if [[ "$match" == true ]]; then
-        echo -e "${CYAN}INTERFACE SELECTED: $choose_option :)"
+        echo -e "${PURPLE}INTERFACE SELECTED: ${GHOST_WHITE}$choose_option :)"
 
-            echo -e "${RED}STARTING.."
+            echo -e "${MAGENTA}STARTING.."
 
             tcpdump -i $choose_option 'tcp and (not src host 127.0.0.1 and not dst host 127.0.0.1) and not arp' -n 2>&1| grep -v "tcpdump"| 
             while read -r line;do
@@ -58,9 +66,9 @@ node_analysis() {
                 check_request=$(curl -s https://onionoo.torproject.org/details?search=$dest_node)
   
                 if [[ $check_request == *"fingerprint"* ]];then
-                    echo -e "${GREEN}TOR CONNECTION FOUND!"
-                    echo -e "${GREEN}   SOURCE NODE:${RED} $src_node"
-                    echo -e "${GREEN}   DESTINATION:${RED} $dest_node"
+                    echo -e "${CYAN}TOR CONNECTION FOUND!"
+                    echo -e "${CYAN}   SOURCE NODE:${MAGENTA} $src_node"
+                    echo -e "${CYAN}   DESTINATION:${MAGENTA} $dest_node"
 
                     fingerprint=$(echo "$check_request" | jq -r '.relays[0].fingerprint')
                     peer_nickname=$(echo "$check_request" | jq -r '.relays[0].nickname')
@@ -68,21 +76,21 @@ node_analysis() {
                     contact=$(echo "$check_request" | jq -r '.relays[0].contact')
                     as_name=$(echo "$check_request" | jq -r '.relays[0].as_name')
 
-                    echo "      Fingerprint: $fingerprint"
-                    echo "      Peer nickname: $peer_nickname"
-                    echo "      Country: $country"
-                    echo "      AS Name: $as_name"
-                    echo "      Contact: $contact"
+                    echo -e "      ${MAGENTA}Fingerprint: ${GHOST_WHITE}$fingerprint"
+                    echo -e "      ${MAGENTA}Peer nickname:  ${GHOST_WHITE}$peer_nickname"
+                    echo -e "      ${MAGENTA}Country:  ${GHOST_WHITE}$country"
+                    echo -e "      ${MAGENTA}AS Name:  ${GHOST_WHITE}$as_name"
+                    echo -e "      ${MAGENTA}Contact:  ${GHOST_WHITE}$contact"
 
 
-                    echo -e "${GREEN}   CLIENT ${RED}$src_node ${GREEN}IS CONNECTING TO TOR WITH PEER WITH${RED} $dest_node! \n "
+                    echo -e "${CYAN}   CLIENT ${MAGENTA}$src_node ${PURPLE}IS CONNECTING TO TOR WITH PEER ${CYAN} $dest_node! \n "
                 else
-                    echo ".*.*.*.*.*." | pv -qL 25
+                    echo -e "${CYAN}.*.*.*.*.*." | pv -qL 25
                     
                 fi
             done
         else
-        echo -e "${RED} No interfaces available with that name"
+        echo -e "${MAGENTA} No interfaces available with that name"
     fi
 }
 
