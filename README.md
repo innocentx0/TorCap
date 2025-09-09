@@ -1,5 +1,5 @@
 # TorCap
-TOR Node Analyzer sniffer
+TOR Node Sniffer
 
 This Bash script is designed for ethical network analysis, specifically to detect and identify connections to the Tor network and client inside the network receiving / sending data over TOR. It listens to network traffic, filters out specific IP addresses, and checks whether the destination node belongs to a Tor relay. If it does, the script retrieves information such as the Tor relay's fingerprint, nickname, country, and contact details. 
 
