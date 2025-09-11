@@ -7,11 +7,6 @@
 #apt-get install pv and apt-get install install jq
 #Happy hunting :)
 
-# RED='\033[0;31m'
-# GREEN='\033[0;32m'
-# BLUE='\033[1;34m'
-# CYAN='\e[1;36m'
-
 MAGENTA='\033[1;35m'
 CYAN='\033[1;36m'
 BLUE='\033[1;34m'
