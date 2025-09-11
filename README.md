@@ -3,7 +3,7 @@ TOR Node Sniffer
 
 <img width="538" height="710" alt="image" src="https://github.com/user-attachments/assets/5767e165-0de7-45d4-b9f4-d353a4b10fa7" />
 
-This Bash script is designed for ethical network analysis, specifically to detect and identify connections to the Tor network and client inside the network receiving / sending data over TOR. It listens to network traffic, filters out specific IP addresses, and checks whether the destination node belongs to a Tor relay. If it does, the script retrieves information such as the Tor relay's fingerprint, nickname, country, and contact details. 
+This Bash script is designed for network analysis, specifically to detect and identify connections to the Tor network made by client inside the network receiving / sending data over TOR. It listens to network traffic, filters out specific IP addresses, and checks whether the destination node belongs to a Tor relay. If it does, the script retrieves information such as the Tor relay's fingerprint, nickname, country, and contact details. 
 
 # Important Disclaimer
 
@@ -22,6 +22,10 @@ This is crucial because the script works by sniffing TCP packets within the netw
 - Tor Relay Detection: Identifies connections to Tor relays based on destination IPs.
 - Relay Information Retrieval: Retrieves details such as fingerprint, nickname, country, and AS name for Tor relays.
 
+# Features coming soon
+- Analyze pcap files
+- Saving data in a log file
+  
 # Requirements
 sudo apt-get install pv && sudo apt-get install jq
 
